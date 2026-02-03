@@ -1,0 +1,2036 @@
+/* ==========================================================================
+   macOS Desktop Portfolio - Stylesheet
+   A faithful recreation of macOS Sonoma aesthetics with refined polish
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS Variables & Theme
+   -------------------------------------------------------------------------- */
+:root {
+  /* macOS Sonoma color palette - refined */
+  --macos-bg: #1c1c1e;
+  --macos-window-bg: rgba(28, 28, 30, 0.88);
+  --macos-window-header: rgba(50, 50, 52, 0.96);
+  --macos-sidebar: rgba(36, 36, 38, 0.92);
+  --macos-text: #f5f5f7;
+  --macos-text-secondary: rgba(255, 255, 255, 0.55);
+  --macos-text-tertiary: rgba(255, 255, 255, 0.35);
+  --macos-border: rgba(255, 255, 255, 0.08);
+  --macos-border-light: rgba(255, 255, 255, 0.12);
+  --macos-accent: #0a84ff;
+  --macos-accent-hover: #3a9fff;
+  --macos-accent-subtle: rgba(10, 132, 255, 0.15);
+
+  /* Traffic light colors - exact macOS values */
+  --traffic-close: #ff5f56;
+  --traffic-minimize: #ffbd2e;
+  --traffic-maximize: #27c93f;
+  --traffic-inactive: rgba(128, 128, 128, 0.35);
+
+  /* Dock - refined glass effect */
+  --dock-bg: rgba(255, 255, 255, 0.12);
+  --dock-border: rgba(255, 255, 255, 0.18);
+  --dock-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.25);
+
+  /* Typography - SF Pro inspired */
+  --font-system: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;
+  --font-mono: 'SF Mono', ui-monospace, 'Monaco', 'Cascadia Code', 'Consolas', monospace;
+  --font-rounded: -apple-system, BlinkMacSystemFont, 'SF Pro Rounded', 'Helvetica Neue', sans-serif;
+
+  /* Spacing scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Transitions - macOS-like easing */
+  --transition-fast: 120ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-normal: 200ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-slow: 350ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Shadows - refined depth */
+  --shadow-window:
+    0 24px 80px -12px rgba(0, 0, 0, 0.5),
+    0 8px 24px -8px rgba(0, 0, 0, 0.3),
+    0 0 0 0.5px rgba(255, 255, 255, 0.08);
+  --shadow-window-active:
+    0 28px 90px -10px rgba(0, 0, 0, 0.55),
+    0 12px 32px -8px rgba(0, 0, 0, 0.35),
+    0 0 0 0.5px rgba(255, 255, 255, 0.1);
+  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.25);
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  /* Border radius - macOS style */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   Base Reset for Desktop Mode
+   -------------------------------------------------------------------------- */
+.desktop-mode,
+.desktop-mode * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.desktop-mode {
+  font-family: var(--font-system);
+  font-size: 13px;
+  line-height: 1.47;
+  color: var(--macos-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  background: var(--macos-bg);
+}
+
+/* Hide scrollbar in desktop mode */
+.desktop-mode::-webkit-scrollbar {
+  display: none;
+}
+
+.desktop-mode {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* --------------------------------------------------------------------------
+   Boot Sequence
+   -------------------------------------------------------------------------- */
+#boot-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: opacity 0.5s ease-out;
+}
+
+#boot-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#boot-screen.hidden {
+  display: none;
+}
+
+.boot-logo {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: bootLogoFade 0.5s ease-out 0.2s forwards;
+}
+
+.boot-logo svg {
+  width: 100%;
+  height: 100%;
+  fill: #fff;
+}
+
+@keyframes bootLogoFade {
+  to { opacity: 1; }
+}
+
+.boot-progress {
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  opacity: 0;
+  animation: bootLogoFade 0.3s ease-out 0.5s forwards;
+}
+
+.boot-progress-bar {
+  height: 100%;
+  width: 0;
+  background: #fff;
+  border-radius: 2px;
+  animation: bootProgress 2.5s ease-in-out 0.8s forwards;
+}
+
+@keyframes bootProgress {
+  0% { width: 0; }
+  20% { width: 25%; }
+  50% { width: 60%; }
+  80% { width: 85%; }
+  100% { width: 100%; }
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Environment
+   -------------------------------------------------------------------------- */
+#desktop {
+  position: fixed;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-out, visibility 0.5s;
+}
+
+#desktop.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Wallpaper - macOS Sonoma style */
+#wallpaper {
+  position: absolute;
+  inset: 0;
+  background: url('../images/wallpaper.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Subtle vignette for depth */
+#wallpaper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 150% 100% at 50% 100%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Menu Bar
+   -------------------------------------------------------------------------- */
+#menu-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: rgba(22, 22, 24, 0.78);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 9000;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.06);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+#menu-bar.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.menu-apple {
+  font-size: 15px;
+  opacity: 0.92;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* Apple logo */
+.menu-apple::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 17px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 170 170'%3E%3Cpath fill='%23fff' d='M150.4 130.3c-2.4 5.5-5.2 10.5-8.5 15.1-4.5 6.3-8.1 10.6-11 13-4.4 4-9.1 6-14.2 6.1-3.6 0-8-1-13.1-3.1-5.1-2-9.8-3.1-14.1-3.1-4.5 0-9.4 1-14.5 3.1-5.2 2.1-9.3 3.1-12.5 3.2-4.9.2-9.7-1.9-14.4-6.2-3.1-2.6-6.9-7.1-11.6-13.4-5-6.8-9.1-14.6-12.3-23.6-3.4-9.7-5.2-19-5.2-28.1 0-10.4 2.2-19.3 6.7-26.8 3.5-6 8.2-10.7 14-14.2 5.8-3.5 12.1-5.3 18.8-5.4 3.8 0 8.9 1.2 15.1 3.5 6.2 2.3 10.2 3.5 12 3.5 1.3 0 5.8-1.4 13.3-4.1 7.1-2.5 13.1-3.6 18-3.1 13.3 1.1 23.3 6.3 29.9 15.8-11.9 7.2-17.8 17.3-17.6 30.2.1 10 3.7 18.4 10.8 25 3.2 3 6.7 5.4 10.7 7-0.9 2.5-1.8 4.9-2.8 7.1zM119.3 8c0 7.9-2.9 15.2-8.6 22-6.9 8-15.2 12.7-24.2 11.9-.1-1-.2-2-.2-3 0-7.5 3.3-15.6 9.1-22.2 2.9-3.3 6.6-6.1 11.1-8.3 4.4-2.2 8.6-3.4 12.6-3.6.1 1.1.2 2.1.2 3.2z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.menu-item {
+  opacity: 0.88;
+  cursor: default;
+  transition: opacity var(--transition-fast);
+  padding: 0 2px;
+}
+
+.menu-item:first-of-type {
+  font-weight: 600;
+}
+
+.menu-item:hover {
+  opacity: 1;
+}
+
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+}
+
+.menu-time {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  font-weight: 450;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Icons
+   -------------------------------------------------------------------------- */
+#desktop-icons {
+  position: absolute;
+  top: 36px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap-reverse;
+  align-content: flex-end;
+  gap: 4px;
+  max-height: calc(100vh - 120px);
+  padding: 12px;
+}
+
+.desktop-icon {
+  width: 80px;
+  padding: 10px 6px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  opacity: 0;
+  transform: scale(0.85) translateY(8px);
+  user-select: none;
+}
+
+.desktop-icon.visible {
+  animation: iconAppear 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes iconAppear {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.desktop-icon:active {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(0.97);
+}
+
+.desktop-icon.selected {
+  background: rgba(10, 132, 255, 0.35);
+  box-shadow: 0 0 0 1px rgba(10, 132, 255, 0.5);
+}
+
+.desktop-icon-image {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.35));
+  transition: transform var(--transition-fast);
+}
+
+.desktop-icon:hover .desktop-icon-image {
+  transform: scale(1.05);
+}
+
+.desktop-icon-label {
+  font-size: 11px;
+  font-weight: 400;
+  text-align: center;
+  color: var(--macos-text);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.7),
+    0 2px 4px rgba(0, 0, 0, 0.4);
+  line-height: 1.25;
+  max-width: 74px;
+  word-wrap: break-word;
+  letter-spacing: -0.01em;
+}
+
+/* Folder icon style - macOS Finder folder */
+.icon-folder {
+  background: linear-gradient(180deg, #6fcfff 0%, #3daee9 40%, #2d9ad8 100%);
+  width: 56px;
+  height: 46px;
+  border-radius: 3px 3px var(--radius-sm) var(--radius-sm);
+  position: relative;
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.icon-folder::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 3px;
+  width: 24px;
+  height: 11px;
+  background: linear-gradient(180deg, #6fcfff 0%, #3daee9 100%);
+  border-radius: 4px 4px 0 0;
+}
+
+.icon-folder::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 1px;
+}
+
+/* Terminal icon - refined */
+.icon-terminal {
+  background: linear-gradient(180deg, #3d3d3d 0%, #232323 100%);
+  width: 52px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 600;
+  color: #27c93f;
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  letter-spacing: -0.05em;
+}
+
+/* Calendar icon - refined macOS style */
+.icon-calendar {
+  background: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+}
+
+.icon-calendar-header {
+  background: linear-gradient(180deg, #ff453a 0%, #e8352b 100%);
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.icon-calendar-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  font-size: 28px;
+  font-weight: 200;
+  color: #1d1d1f;
+  font-family: var(--font-system);
+}
+
+/* Mail icon - refined */
+.icon-mail {
+  background: linear-gradient(180deg, #64d2ff 0%, #0a84ff 100%);
+  width: 52px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+
+.icon-mail::before {
+  content: '';
+  width: 26px;
+  height: 17px;
+  border: 2.5px solid #fff;
+  border-radius: 3px;
+}
+
+.icon-mail::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 8px;
+  border-left: 2.5px solid #fff;
+  border-top: 2.5px solid #fff;
+  transform: rotate(45deg) translateY(3px);
+  top: 11px;
+}
+
+/* Certificate/Keychain icon - refined */
+.icon-certificate {
+  background: linear-gradient(180deg, #9d8563 0%, #7a6848 50%, #5a4d35 100%);
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-md);
+  position: relative;
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-certificate::before {
+  content: '';
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  position: relative;
+}
+
+.icon-certificate::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px 2px 4px 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Dock
+   -------------------------------------------------------------------------- */
+#dock {
+  position: fixed;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  padding: 3px 6px;
+  background: var(--dock-bg);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 0.5px solid var(--dock-border);
+  border-radius: 16px;
+  z-index: 8000;
+  opacity: 0;
+  transition: transform var(--transition-spring), opacity var(--transition-normal);
+}
+
+#dock.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.dock-item {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.12s ease-out;
+  transform-origin: bottom center;
+}
+
+.dock-item:hover {
+  transform: translateY(-6px) scale(1.3);
+}
+
+/* Magnification for adjacent items */
+.dock-item.adjacent {
+  transform: scale(1.12);
+}
+
+.dock-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.1);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.dock-item:hover .dock-icon {
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.15);
+}
+
+/* Dock item tooltip - refined */
+.dock-item::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.85) translateY(4px);
+  background: rgba(28, 28, 30, 0.92);
+  backdrop-filter: blur(12px);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 450;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.dock-item:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) scale(1) translateY(0);
+}
+
+/* Active indicator dot */
+.dock-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+/* Dock bounce animation */
+.dock-item.bouncing .dock-icon {
+  animation: dockBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes dockBounce {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-14px); }
+  50% { transform: translateY(-6px); }
+  75% { transform: translateY(-10px); }
+}
+
+/* Dock separator */
+.dock-separator {
+  width: 1px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 0 3px;
+  align-self: center;
+  border-radius: 1px;
+}
+
+/* Dock icon styles - consistent macOS look */
+.dock-finder {
+  background: linear-gradient(180deg, #64d2ff 0%, #3daee9 50%, #2d9ad8 100%);
+  position: relative;
+}
+
+.dock-finder::before {
+  content: '';
+  width: 20px;
+  height: 24px;
+  background: #fff;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 24'%3E%3Crect x='0' y='0' width='8' height='24' rx='1'/%3E%3Crect x='12' y='0' width='8' height='24' rx='1'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 24'%3E%3Crect x='0' y='0' width='8' height='24' rx='1'/%3E%3Crect x='12' y='0' width='8' height='24' rx='1'/%3E%3C/svg%3E");
+  mask-size: contain;
+  -webkit-mask-size: contain;
+}
+
+.dock-notes {
+  background: linear-gradient(180deg, #ffe066 0%, #ffc800 100%);
+  font-size: 24px;
+  position: relative;
+}
+
+.dock-notes::before {
+  content: '';
+  width: 24px;
+  height: 28px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: inset 0 -3px 0 #f0d000;
+}
+
+.dock-notes::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 1px;
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.15),
+    0 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+.dock-calendar {
+  background: #fff;
+  flex-direction: column;
+  padding: 2px;
+  overflow: hidden;
+}
+
+.dock-calendar-header {
+  width: 100%;
+  height: 11px;
+  background: linear-gradient(180deg, #ff453a 0%, #e8352b 100%);
+  border-radius: 8px 8px 0 0;
+  font-size: 6px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.dock-calendar-day {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 200;
+  color: #1d1d1f;
+  font-family: var(--font-system);
+}
+
+.dock-terminal {
+  background: linear-gradient(180deg, #3d3d3d 0%, #232323 100%);
+  color: #27c93f;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+}
+
+.dock-keychain {
+  background: linear-gradient(180deg, #9d8563 0%, #7a6848 50%, #5a4d35 100%);
+  position: relative;
+}
+
+.dock-keychain::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+}
+
+.dock-keychain::after {
+  content: '';
+  position: absolute;
+  bottom: 7px;
+  width: 6px;
+  height: 11px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px 2px 3px 3px;
+}
+
+.dock-mail {
+  background: linear-gradient(180deg, #64d2ff 0%, #0a84ff 100%);
+  position: relative;
+}
+
+.dock-mail::before {
+  content: '';
+  width: 22px;
+  height: 15px;
+  border: 2px solid #fff;
+  border-radius: 2px;
+}
+
+.dock-mail::after {
+  content: '';
+  position: absolute;
+  width: 11px;
+  height: 6px;
+  border-left: 2px solid #fff;
+  border-top: 2px solid #fff;
+  transform: rotate(45deg) translateY(2px);
+  top: 12px;
+}
+
+.dock-safari {
+  background: linear-gradient(180deg, #64d2ff 0%, #0a84ff 100%);
+  position: relative;
+}
+
+.dock-safari::before {
+  content: '';
+  width: 22px;
+  height: 28px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.dock-safari::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  width: 12px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 1px;
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.2),
+    0 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+.dock-github {
+  background: linear-gradient(180deg, #333 0%, #1a1a1a 100%);
+  color: #fff;
+  font-size: 24px;
+}
+
+.dock-github i {
+  font-size: 24px;
+}
+
+.dock-linkedin {
+  background: linear-gradient(180deg, #0077b5 0%, #0a66c2 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   Windows
+   -------------------------------------------------------------------------- */
+.window {
+  position: absolute;
+  background: var(--macos-window-bg);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-window);
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  opacity: 0;
+  transform: scale(0.92) translateY(8px);
+  transition:
+    opacity var(--transition-normal),
+    transform var(--transition-spring),
+    box-shadow var(--transition-normal);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.window.open {
+  display: flex;
+}
+
+.window.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.window.active {
+  box-shadow: var(--shadow-window-active);
+}
+
+.window.closing {
+  opacity: 0;
+  transform: scale(0.95) translateY(4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+/* Window header - refined height and styling */
+.window-header {
+  height: 38px;
+  min-height: 38px;
+  background: linear-gradient(180deg,
+    rgba(60, 60, 62, 0.98) 0%,
+    rgba(50, 50, 52, 0.98) 100%
+  );
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.4);
+  position: relative;
+  user-select: none;
+}
+
+/* Traffic lights - precise macOS styling */
+.traffic-lights {
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.traffic-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: background-color var(--transition-fast);
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+.traffic-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.window:hover .traffic-light::before {
+  opacity: 1;
+}
+
+.traffic-close {
+  background: var(--traffic-close);
+  box-shadow:
+    inset 0 0 0 0.5px rgba(0, 0, 0, 0.15),
+    inset 0 -0.5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.traffic-close::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3.5 3.5l5 5m0-5l-5 5' stroke='%234a0002' stroke-width='1.1' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+}
+
+.traffic-minimize {
+  background: var(--traffic-minimize);
+  box-shadow:
+    inset 0 0 0 0.5px rgba(0, 0, 0, 0.15),
+    inset 0 -0.5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.traffic-minimize::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6h7' stroke='%23985600' stroke-width='1.1' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+}
+
+.traffic-maximize {
+  background: var(--traffic-maximize);
+  box-shadow:
+    inset 0 0 0 0.5px rgba(0, 0, 0, 0.15),
+    inset 0 -0.5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.traffic-maximize::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 3l3 3 3-3M3 9l3-3 3 3' stroke='%23006500' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+}
+
+/* Window title - refined */
+.window-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--macos-text);
+  opacity: 0.92;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: -0.01em;
+}
+
+.window-title-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Window content - refined */
+.window-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: rgba(28, 28, 30, 0.6);
+}
+
+/* Custom scrollbar - macOS style */
+.window-content::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+
+.window-content::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 4px;
+}
+
+.window-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.window-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+  background-clip: content-box;
+}
+
+/* --------------------------------------------------------------------------
+   Window Sizes & Positions
+   -------------------------------------------------------------------------- */
+.window-standard {
+  width: 580px;
+  height: 480px;
+  top: 60px;
+  left: 100px;
+}
+
+.window-wide {
+  width: 860px;
+  height: 540px;
+  top: 80px;
+  left: 160px;
+}
+
+.window-finder {
+  width: 880px;
+  height: 560px;
+  top: 50px;
+  left: 140px;
+}
+
+.window-grid {
+  width: 680px;
+  height: 520px;
+  top: 70px;
+  left: 120px;
+}
+
+/* Cascade positions for multiple windows */
+.window[data-cascade="1"] { top: 80px; left: 120px; }
+.window[data-cascade="2"] { top: 95px; left: 150px; }
+.window[data-cascade="3"] { top: 110px; left: 180px; }
+.window[data-cascade="4"] { top: 125px; left: 210px; }
+
+/* --------------------------------------------------------------------------
+   About Window Content
+   -------------------------------------------------------------------------- */
+.about-content {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-header {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+}
+
+.about-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  box-shadow: var(--shadow-elevated);
+  flex-shrink: 0;
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-intro {
+  flex: 1;
+}
+
+.about-intro h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--macos-text);
+  letter-spacing: -0.02em;
+}
+
+.about-intro h3 {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--macos-text-secondary);
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+.about-intro p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.about-education {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  border: 0.5px solid var(--macos-border);
+}
+
+.about-education h4 {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--macos-text-secondary);
+  margin-bottom: 14px;
+}
+
+.education-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 0.5px solid var(--macos-border);
+  position: relative;
+  padding-left: 0;
+}
+
+/* Override mobile education bar styles for desktop */
+.about-education .education-item::before {
+  display: none !important;
+}
+
+.education-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.education-icon {
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, var(--macos-accent) 0%, var(--macos-accent-hover) 100%);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.education-details h5 {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+}
+
+.education-details p {
+  font-size: 12px;
+  color: var(--macos-text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   Experience Window Content
+   -------------------------------------------------------------------------- */
+.experience-content {
+  padding: var(--space-lg);
+}
+
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.experience-item {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.025);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  border: 0.5px solid transparent;
+  border-left: 3px solid transparent;
+}
+
+.experience-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--macos-border);
+  border-left-color: var(--macos-accent);
+}
+
+.experience-date {
+  width: 95px;
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--macos-text-secondary);
+  padding-top: 3px;
+  font-variant-numeric: tabular-nums;
+}
+
+.experience-details {
+  flex: 1;
+}
+
+.experience-details h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  letter-spacing: -0.01em;
+}
+
+.experience-details h5 {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--macos-accent);
+  margin-bottom: 3px;
+}
+
+.experience-location {
+  font-size: 11px;
+  color: var(--macos-text-tertiary);
+  margin-bottom: 10px;
+}
+
+.experience-details ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.experience-details li {
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.75);
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.experience-details li:last-child {
+  margin-bottom: 0;
+}
+
+.experience-details li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 4px;
+  height: 4px;
+  background: var(--macos-accent);
+  border-radius: 50%;
+}
+
+/* --------------------------------------------------------------------------
+   Finder Window (Projects)
+   -------------------------------------------------------------------------- */
+.finder-layout {
+  display: flex;
+  height: 100%;
+}
+
+.finder-sidebar {
+  width: 170px;
+  background: var(--macos-sidebar);
+  border-right: 0.5px solid var(--macos-border);
+  padding: 10px 0;
+  flex-shrink: 0;
+}
+
+.finder-sidebar-section {
+  padding: 0 10px;
+  margin-bottom: 14px;
+}
+
+.finder-sidebar-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--macos-text-tertiary);
+  margin-bottom: 6px;
+  padding: 0 8px;
+}
+
+.finder-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all var(--transition-fast);
+}
+
+.finder-sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.finder-sidebar-item.active {
+  background: var(--macos-accent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.finder-sidebar-icon {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.finder-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.finder-toolbar {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.025);
+  border-bottom: 0.5px solid var(--macos-border);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 12px;
+}
+
+.finder-toolbar-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  color: var(--macos-text);
+  font-size: 11px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.finder-toolbar-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.finder-path {
+  font-size: 11px;
+  color: var(--macos-text-tertiary);
+  flex: 1;
+}
+
+.finder-grid {
+  flex: 1;
+  padding: var(--space-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-md);
+  align-content: flex-start;
+  overflow-y: auto;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.035);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 0.5px solid var(--macos-border);
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(10, 132, 255, 0.2);
+  border-color: rgba(10, 132, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.project-card:active {
+  transform: translateY(-1px);
+}
+
+.project-card-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%);
+  border-bottom: 0.5px solid var(--macos-border);
+}
+
+.project-card-info {
+  padding: 10px 12px 12px;
+}
+
+.project-card-title {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--macos-text);
+}
+
+.project-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.project-card-tag {
+  font-size: 9px;
+  padding: 2px 6px;
+  background: var(--macos-accent-subtle);
+  color: var(--macos-accent);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* --------------------------------------------------------------------------
+   Project Modal
+   -------------------------------------------------------------------------- */
+.project-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9500;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.project-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.project-modal-content {
+  width: 90%;
+  max-width: 640px;
+  max-height: 80vh;
+  background: var(--macos-window-bg);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-window-active);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.92) translateY(16px);
+  transition: transform var(--transition-spring);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-modal.open .project-modal-content {
+  transform: scale(1) translateY(0);
+}
+
+.project-modal-header {
+  height: 38px;
+  background: linear-gradient(180deg,
+    rgba(60, 60, 62, 0.98) 0%,
+    rgba(50, 50, 52, 0.98) 100%
+  );
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.4);
+}
+
+.project-modal-close {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--traffic-close);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  box-shadow:
+    inset 0 0 0 0.5px rgba(0, 0, 0, 0.15),
+    inset 0 -0.5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.project-modal-close::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3.5 3.5l5 5m0-5l-5 5' stroke='%234a0002' stroke-width='1.1' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.project-modal-close:hover::before {
+  opacity: 1;
+}
+
+.project-modal-title {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.project-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-lg);
+}
+
+.project-modal-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+  border: 0.5px solid var(--macos-border);
+}
+
+.project-modal-description {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: var(--space-md);
+}
+
+.project-modal-section {
+  margin-bottom: var(--space-md);
+}
+
+.project-modal-section h4 {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--macos-text-secondary);
+  margin-bottom: 10px;
+}
+
+.project-modal-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.project-modal-section li {
+  font-size: 12px;
+  line-height: 1.55;
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.project-modal-section li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 4px;
+  height: 4px;
+  background: var(--macos-accent);
+  border-radius: 50%;
+}
+
+.project-modal-links {
+  display: flex;
+  gap: 10px;
+  margin-top: var(--space-lg);
+}
+
+.project-modal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  background: var(--macos-accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  border: none;
+}
+
+.project-modal-link:hover {
+  background: var(--macos-accent-hover);
+  transform: translateY(-1px);
+}
+
+.project-modal-link.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border: 0.5px solid var(--macos-border);
+}
+
+.project-modal-link.secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* --------------------------------------------------------------------------
+   Skills Window Content
+   -------------------------------------------------------------------------- */
+.skills-content {
+  padding: var(--space-lg);
+}
+
+.skills-category {
+  margin-bottom: var(--space-lg);
+}
+
+.skills-category:last-child {
+  margin-bottom: 0;
+}
+
+.skills-category-title {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 0.5px solid var(--macos-border);
+  color: var(--macos-text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+  gap: 10px;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 6px;
+  background: rgba(255, 255, 255, 0.025);
+  border-radius: var(--radius-md);
+  border: 0.5px solid transparent;
+  transition: all var(--transition-fast);
+  cursor: default;
+}
+
+.skill-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
+  border-color: var(--macos-border);
+  box-shadow: var(--shadow-subtle);
+}
+
+.skill-icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+.skill-icon i {
+  font-size: 30px;
+}
+
+.skill-icon img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.skill-name {
+  font-size: 10px;
+  text-align: center;
+  color: var(--macos-text-tertiary);
+  line-height: 1.25;
+  font-weight: 450;
+}
+
+/* --------------------------------------------------------------------------
+   Certifications Window Content
+   -------------------------------------------------------------------------- */
+.certifications-content {
+  padding: var(--space-lg);
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: var(--space-md);
+}
+
+.cert-item {
+  background: rgba(255, 255, 255, 0.035);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+  border: 0.5px solid var(--macos-border);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.cert-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-elevated);
+  border-color: var(--macos-border-light);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cert-item:active {
+  transform: translateY(-1px);
+}
+
+.cert-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%);
+  padding: 14px;
+  transition: filter var(--transition-fast);
+}
+
+.cert-item:hover img {
+  filter: brightness(1.05);
+}
+
+/* --------------------------------------------------------------------------
+   Contact Window Content
+   -------------------------------------------------------------------------- */
+.contact-content {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: var(--space-md);
+  box-shadow: var(--shadow-elevated);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-name {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.contact-tagline {
+  font-size: 13px;
+  color: var(--macos-text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.035);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--macos-text);
+  transition: all var(--transition-fast);
+  border: 0.5px solid var(--macos-border);
+}
+
+.contact-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--macos-border-light);
+  transform: translateX(2px);
+}
+
+.contact-link:active {
+  transform: translateX(0);
+}
+
+.contact-link-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.contact-link-icon.email {
+  background: linear-gradient(135deg, #64d2ff 0%, #0a84ff 100%);
+}
+
+.contact-link-icon.phone {
+  background: linear-gradient(135deg, #30d158 0%, #28a745 100%);
+}
+
+.contact-link-icon.linkedin {
+  background: linear-gradient(135deg, #0077b5 0%, #0a66c2 100%);
+  font-weight: 700;
+}
+
+.contact-link-icon.github {
+  background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+  color: #fff;
+}
+
+.contact-link-icon.resume {
+  background: linear-gradient(135deg, #ff6961 0%, #e84c3d 100%);
+}
+
+.contact-link-text {
+  flex: 1;
+  text-align: left;
+  min-width: 0;
+}
+
+.contact-link-label {
+  font-size: 10px;
+  color: var(--macos-text-tertiary);
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+.contact-link-value {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Fallback
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  #boot-screen,
+  #desktop,
+  #menu-bar,
+  #dock,
+  #desktop-icons,
+  .window,
+  .project-modal {
+    display: none !important;
+  }
+
+  .desktop-mode {
+    overflow: auto;
+    height: auto;
+    background: #242943;
+  }
+
+  /* Show mobile sections */
+  #mobile-fallback {
+    display: block !important;
+  }
+}
+
+/* Hide mobile fallback on desktop */
+@media (min-width: 769px) {
+  #mobile-fallback {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .boot-progress-bar {
+    animation: none;
+    width: 100%;
+  }
+
+  #wallpaper {
+    animation: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Utilities
+   -------------------------------------------------------------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Additional Polish & Refinements
+   -------------------------------------------------------------------------- */
+
+/* Glassmorphism enhancement for windows */
+.window::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  padding: 0.5px;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 40%,
+    transparent 60%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Dock glass effect enhancement */
+#dock::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  pointer-events: none;
+}
+
+/* Traffic lights inactive state - refined */
+.window:not(:hover) .traffic-close,
+.window:not(:hover) .traffic-minimize,
+.window:not(:hover) .traffic-maximize {
+  background-color: var(--traffic-inactive);
+}
+
+.window:hover .traffic-close {
+  background-color: var(--traffic-close);
+}
+
+.window:hover .traffic-minimize {
+  background-color: var(--traffic-minimize);
+}
+
+.window:hover .traffic-maximize {
+  background-color: var(--traffic-maximize);
+}
+
+/* Focus states - refined */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--macos-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Smooth scroll behavior */
+.window-content {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+.desktop-mode ::selection {
+  background: rgba(10, 132, 255, 0.35);
+}
+
+/* Image loading placeholder */
+.project-card-image,
+.about-photo,
+.contact-avatar,
+.cert-item img {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+
+/* Print styles - hide desktop interface */
+@media print {
+  #boot-screen,
+  #desktop,
+  #menu-bar,
+  #dock {
+    display: none !important;
+  }
+
+  #mobile-fallback {
+    display: block !important;
+  }
+}

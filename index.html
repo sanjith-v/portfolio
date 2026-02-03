@@ -1,694 +1,1020 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title>Sanjith Krishna | Data Science Portfolio</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  <meta name="description" content="Data Science portfolio of Sanjith Krishna - Machine Learning, NLP, and Analytics">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/desktop.css">
+  <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+
+  <!-- Preload critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
-<script>
-  window.addEventListener('load', () => {
-    document.body.classList.remove('is-preload');
-  });
-</script>
+<body class="desktop-mode">
 
-<body class="is-preload">
+<!-- ============================================================
+     BOOT SEQUENCE
+     ============================================================ -->
+<div id="boot-screen">
+  <div class="boot-logo">
+    <!-- Apple logo -->
+    <svg viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg">
+      <path d="M150.4 130.3c-2.4 5.5-5.2 10.5-8.5 15.1-4.5 6.3-8.1 10.6-11 13-4.4 4-9.1 6-14.2 6.1-3.6 0-8-1-13.1-3.1-5.1-2-9.8-3.1-14.1-3.1-4.5 0-9.4 1-14.5 3.1-5.2 2.1-9.3 3.1-12.5 3.2-4.9.2-9.7-1.9-14.4-6.2-3.1-2.6-6.9-7.1-11.6-13.4-5-6.8-9.1-14.6-12.3-23.6-3.4-9.7-5.2-19-5.2-28.1 0-10.4 2.2-19.3 6.7-26.8 3.5-6 8.2-10.7 14-14.2 5.8-3.5 12.1-5.3 18.8-5.4 3.8 0 8.9 1.2 15.1 3.5 6.2 2.3 10.2 3.5 12 3.5 1.3 0 5.8-1.4 13.3-4.1 7.1-2.5 13.1-3.6 18-3.1 13.3 1.1 23.3 6.3 29.9 15.8-11.9 7.2-17.8 17.3-17.6 30.2.1 10 3.7 18.4 10.8 25 3.2 3 6.7 5.4 10.7 7-0.9 2.5-1.8 4.9-2.8 7.1zM119.3 8c0 7.9-2.9 15.2-8.6 22-6.9 8-15.2 12.7-24.2 11.9-.1-1-.2-2-.2-3 0-7.5 3.3-15.6 9.1-22.2 2.9-3.3 6.6-6.1 11.1-8.3 4.4-2.2 8.6-3.4 12.6-3.6.1 1.1.2 2.1.2 3.2z"/>
+    </svg>
+  </div>
+  <div class="boot-progress">
+    <div class="boot-progress-bar"></div>
+  </div>
+</div>
 
- <!-- Wrapper -->
- <div id="wrapper">
+<!-- ============================================================
+     DESKTOP ENVIRONMENT
+     ============================================================ -->
+<div id="desktop">
 
- <!-- MINIMALIST STICKY NAV -->
-<header id="navbar">
-  <nav class="container">
-    <ul class="nav-links">
-      <!-- always visible -->
-      <li><a href="#banner">HOME</a></li>
-      <li><a href="#about">ABOUT</a></li>
+  <!-- Wallpaper Background -->
+  <div id="wallpaper"></div>
 
-      <!-- “More ▾” toggle (only shows ≤ 600 px) -->
-      <li class="mobile-more">
-        <button class="nav-toggle" aria-expanded="false">MORE ▾</button>
-      </li>
+  <!-- Menu Bar -->
+  <header id="menu-bar">
+    <div class="menu-left">
+      <span class="menu-apple" aria-label="Apple menu"></span>
+      <span class="menu-item">Finder</span>
+      <span class="menu-item">File</span>
+      <span class="menu-item">Edit</span>
+      <span class="menu-item">View</span>
+      <span class="menu-item">Go</span>
+      <span class="menu-item">Window</span>
+      <span class="menu-item">Help</span>
+    </div>
+    <div class="menu-right">
+      <span class="menu-item menu-control-center">
+        <i class="fas fa-sliders-h" style="font-size: 11px;"></i>
+      </span>
+      <span class="menu-item menu-wifi">
+        <i class="fas fa-wifi" style="font-size: 11px;"></i>
+      </span>
+      <span class="menu-time"></span>
+    </div>
+  </header>
 
-      <!-- extra links (hidden on mobile until toggle) -->
-      <li class="extra"><a href="#experience">EXPERIENCE</a></li>
-      <li class="extra"><a href="#projects">PROJECTS</a></li>
-      <li class="extra"><a href="#skills">SKILLS</a></li>
-      <li class="extra"><a href="#certifications">CERTIFICATIONS</a></li>
-      <li class="extra"><a href="#contact">CONTACT</a></li>
-    </ul>
+  <!-- Desktop Icons -->
+  <div id="desktop-icons">
+
+    <div class="desktop-icon" data-window="window-about">
+      <div class="desktop-icon-image">
+        <div class="icon-folder"></div>
+      </div>
+      <span class="desktop-icon-label">About Me</span>
+    </div>
+
+    <div class="desktop-icon" data-window="window-projects">
+      <div class="desktop-icon-image">
+        <div class="icon-folder"></div>
+      </div>
+      <span class="desktop-icon-label">Projects</span>
+    </div>
+
+    <div class="desktop-icon" data-window="window-experience">
+      <div class="desktop-icon-image">
+        <div class="icon-calendar">
+          <div class="icon-calendar-header"></div>
+          <div class="icon-calendar-day"></div>
+        </div>
+      </div>
+      <span class="desktop-icon-label">Experience</span>
+    </div>
+
+    <div class="desktop-icon" data-window="window-skills">
+      <div class="desktop-icon-image">
+        <div class="icon-terminal">>_</div>
+      </div>
+      <span class="desktop-icon-label">Skills</span>
+    </div>
+
+    <div class="desktop-icon" data-window="window-certifications">
+      <div class="desktop-icon-image">
+        <div class="icon-certificate"></div>
+      </div>
+      <span class="desktop-icon-label">Certifications</span>
+    </div>
+
+    <div class="desktop-icon" data-window="window-contact">
+      <div class="desktop-icon-image">
+        <div class="icon-mail"></div>
+      </div>
+      <span class="desktop-icon-label">Contact</span>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       WINDOWS
+       ============================================================ -->
+
+  <!-- About Window -->
+  <div id="window-about" class="window window-standard">
+    <div class="window-header">
+      <div class="traffic-lights">
+        <button class="traffic-light traffic-close" aria-label="Close"></button>
+        <button class="traffic-light traffic-minimize" aria-label="Minimize"></button>
+        <button class="traffic-light traffic-maximize" aria-label="Maximize"></button>
+      </div>
+      <div class="window-title">
+        <span>About Me</span>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="about-content">
+        <div class="about-header">
+          <img src="assets/images/headshot.JPG" alt="Sanjith Krishna" class="about-photo">
+          <div class="about-intro">
+            <h2>Sanjith Krishna</h2>
+            <h3>AI Engineering • Machine Learning • Voice AI</h3>
+            <p>I'm an AI Agent Deployment Engineer at Hippocratic AI, where I deploy healthcare AI solutions processing 100K+ calls across 10 partners. With a Master's in Business Analytics from Purdue and experience building RAG systems, voice agents, and ML models, I specialize in turning cutting-edge AI into production systems that deliver real impact.</p>
+          </div>
+        </div>
+        <div class="about-education">
+          <h4>Education</h4>
+          <div class="education-item">
+            <div class="education-icon">
+              <i class="fas fa-graduation-cap" style="font-size: 14px; color: #fff;"></i>
+            </div>
+            <div class="education-details">
+              <h5>MS in Business Analytics and Information Management</h5>
+              <p>Aug 2025 • Purdue University</p>
+            </div>
+          </div>
+          <div class="education-item">
+            <div class="education-icon">
+              <i class="fas fa-graduation-cap" style="font-size: 14px; color: #fff;"></i>
+            </div>
+            <div class="education-details">
+              <h5>BE in Chemical Engineering</h5>
+              <p>May 2024 • BITS Pilani</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience Window -->
+  <div id="window-experience" class="window window-wide" data-cascade="1">
+    <div class="window-header">
+      <div class="traffic-lights">
+        <button class="traffic-light traffic-close" aria-label="Close"></button>
+        <button class="traffic-light traffic-minimize" aria-label="Minimize"></button>
+        <button class="traffic-light traffic-maximize" aria-label="Maximize"></button>
+      </div>
+      <div class="window-title">
+        <span>Experience</span>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="experience-content">
+        <div class="experience-list">
+
+          <div class="experience-item">
+            <div class="experience-date">Sep 2025 – Present</div>
+            <div class="experience-details">
+              <h4>AI Agent Deployment Engineer</h4>
+              <h5>Hippocratic AI</h5>
+              <p class="experience-location">Palo Alto, USA</p>
+              <ul>
+                <li>Deployed <strong>15 use cases</strong> across 10 healthcare partners, processing <strong>100K+ calls</strong> for payor surveys, pre-assessments, and post-surgery follow-ups.</li>
+                <li>Improved response capture rate by <strong>30%</strong> on complex calls with 100+ questions through voice agent optimization.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-date">Jun 2025 – Aug 2025</div>
+            <div class="experience-details">
+              <h4>AI Engineering Intern</h4>
+              <h5>THERECORDXCHANGE</h5>
+              <p class="experience-location">Indianapolis, USA</p>
+              <ul>
+                <li>Built an AI-powered transcript reviewer using RAG with AWS Bedrock, Claude, and FAISS, reducing compliance review time from <strong>2 hours to under 5 seconds</strong>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-date">Jan 2025 – May 2025</div>
+            <div class="experience-details">
+              <h4>Data Science Consultant</h4>
+              <h5>Kearney Student Lab</h5>
+              <p class="experience-location">West Lafayette, IN</p>
+              <ul>
+                <li>Developed predictive ensemble model (XGBoost + Random Forest) achieving <strong>97.3% precision</strong> for procurement optimization.</li>
+                <li>Forecasted procurement spend using Holt-Winters with <strong>MAPE of 8.46%</strong>.</li>
+                <li>Designed interactive dashboards for centralized procurement analytics.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-date">Sep 2023 – Aug 2024</div>
+            <div class="experience-details">
+              <h4>Data Scientist</h4>
+              <h5>Finsire</h5>
+              <p class="experience-location">Chennai, India</p>
+              <ul>
+                <li>Deployed a valuation model covering all vehicles sold in India (2013-2023) for instant collateral-based lending.</li>
+                <li>Optimized Flask REST APIs, cutting data refresh time from <strong>2 min → 2 sec</strong>.</li>
+                <li>Built NLP bank statement analyzer using Word2Vec and BERT (<strong>65% accuracy</strong>).</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects (Finder) Window -->
+  <div id="window-projects" class="window window-finder" data-cascade="2">
+    <div class="window-header">
+      <div class="traffic-lights">
+        <button class="traffic-light traffic-close" aria-label="Close"></button>
+        <button class="traffic-light traffic-minimize" aria-label="Minimize"></button>
+        <button class="traffic-light traffic-maximize" aria-label="Maximize"></button>
+      </div>
+      <div class="window-title">
+        <span>Projects</span>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="finder-layout">
+
+        <!-- Sidebar -->
+        <div class="finder-sidebar">
+          <div class="finder-sidebar-section">
+            <div class="finder-sidebar-title">Favorites</div>
+            <div class="finder-sidebar-item active" data-category="all">
+              <span class="finder-sidebar-icon">📁</span>
+              <span>All Projects</span>
+            </div>
+            <div class="finder-sidebar-item" data-category="data-science">
+              <span class="finder-sidebar-icon">📊</span>
+              <span>Data Science</span>
+            </div>
+            <div class="finder-sidebar-item" data-category="ml-ai">
+              <span class="finder-sidebar-icon">🤖</span>
+              <span>ML / AI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="finder-main">
+          <div class="finder-toolbar">
+            <span class="finder-path">Projects › All Projects</span>
+          </div>
+          <div class="finder-grid">
+
+            <!-- Project 1: Instacart -->
+            <div class="project-card"
+                 data-categories="data-science"
+                 data-title="Instacart Basket Analysis"
+                 data-description="Leveraged SQL to uncover shopping patterns, reorder dynamics, and cross-sell opportunities from 3M+ grocery orders. Analyzed customer behavior patterns to identify key product associations and optimize recommendation strategies."
+                 data-achievements='["Analyzed 3M+ grocery transactions using advanced SQL queries","Identified cross-sell opportunities through basket analysis","Discovered reorder patterns to improve inventory management","Built customer segmentation models based on shopping behavior"]'
+                 data-project-url="project-1.html">
+              <img src="assets/images/instacart-thumb.png" alt="Instacart Basket Analysis" class="project-card-image">
+              <div class="project-card-info">
+                <h4 class="project-card-title">Instacart Basket Analysis</h4>
+                <div class="project-card-tags">
+                  <span class="project-card-tag">SQL</span>
+                  <span class="project-card-tag">PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 2: GenAI Caption -->
+            <div class="project-card"
+                 data-categories="ml-ai"
+                 data-title="GenAI Caption Generator"
+                 data-description="Built an end-to-end GenAI pipeline generating creative, context-aware captions using BLIP embeddings and GPT-4 API. The system analyzes images and generates engaging social media captions with customizable tone and style."
+                 data-achievements='["Implemented BLIP model for image understanding and embedding generation","Integrated GPT-4 API for creative caption generation","Built FastAPI backend for real-time inference","Achieved 85% user satisfaction in A/B testing"]'
+                 data-project-url="project-2.html">
+              <img src="assets/images/caption-thumb.png" alt="GenAI Caption Generator" class="project-card-image">
+              <div class="project-card-info">
+                <h4 class="project-card-title">GenAI Caption Generator</h4>
+                <div class="project-card-tags">
+                  <span class="project-card-tag">GenAI</span>
+                  <span class="project-card-tag">HuggingFace</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 3: Spotify -->
+            <div class="project-card"
+                 data-categories="data-science,ml-ai"
+                 data-title="Spotify Song Recommender"
+                 data-description="Used clustering and PCA to identify and visualize distinct Spotify song archetypes from audio metadata. Built a recommendation engine that suggests songs based on musical characteristics and user preferences."
+                 data-achievements='["Applied K-means clustering to identify 8 distinct song archetypes","Reduced dimensionality using PCA for visualization","Built recommendation system with 78% relevance score","Processed 100K+ tracks from Spotify API"]'
+                 data-project-url="project-3.html">
+              <img src="assets/images/spotify-thumb.png" alt="Spotify Song Recommender" class="project-card-image">
+              <div class="project-card-info">
+                <h4 class="project-card-title">Spotify Song Recommender</h4>
+                <div class="project-card-tags">
+                  <span class="project-card-tag">PCA</span>
+                  <span class="project-card-tag">Clustering</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 4: Procurement -->
+            <div class="project-card"
+                 data-categories="data-science"
+                 data-title="Procurement Savings Optimization"
+                 data-description="Implemented predictive models and standardized tracking frameworks to optimize procurement savings for a global insurance firm. Developed forecasting models and identified key cost drivers."
+                 data-achievements='["Built XGBoost model with 97.3% accuracy for spend classification","Implemented Holt-Winters forecasting with MAPE of 8.46%","Created Tableau dashboards for real-time tracking","Identified $2.4M in potential savings opportunities"]'
+                 data-project-url="project-4.html">
+              <img src="assets/images/procurement-thumb.png" alt="Procurement Savings Optimization" class="project-card-image">
+              <div class="project-card-info">
+                <h4 class="project-card-title">Procurement Optimization</h4>
+                <div class="project-card-tags">
+                  <span class="project-card-tag">Time Series</span>
+                  <span class="project-card-tag">XGBoost</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 5: Ti3C2 -->
+            <div class="project-card"
+                 data-categories="ml-ai"
+                 data-title="Ti₃C₂ Capacitance Study"
+                 data-description="Developed ML models predicting Ti₃C₂-based supercapacitor performance, providing actionable insights for materials design. Combined domain expertise with machine learning for materials science research."
+                 data-achievements='["Built neural network achieving 0.92 R² on capacitance prediction","Identified key material properties affecting performance","Published findings in peer-reviewed journal","Reduced experimental cycles by 60% through predictive modeling"]'
+                 data-project-url="project-5.html">
+              <img src="assets/images/ti3c2-thumb.png" alt="Ti₃C₂ Capacitance Study" class="project-card-image">
+              <div class="project-card-info">
+                <h4 class="project-card-title">Ti₃C₂ Capacitance Study</h4>
+                <div class="project-card-tags">
+                  <span class="project-card-tag">Research</span>
+                  <span class="project-card-tag">Neural Networks</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 6: Disaster Tweets -->
+            <div class="project-card"
+                 data-categories="ml-ai"
+                 data-title="Disaster Tweet Classification"
+                 data-description="Created a high-performing NLP model ensemble classifying disaster-related tweets using CNNs and BERT transformers. Built for real-time emergency response applications."
+                 data-achievements='["Achieved 84% F1-score on disaster tweet classification","Implemented CNN and BERT ensemble architecture","Processed 10K+ tweets with real-time inference capability","Deployed model for emergency response monitoring"]'
+                 data-project-url="project-6.html">
+              <img src="assets/images/disaster-thumb.png" alt="Disaster Tweet Classification" class="project-card-image">
+              <div class="project-card-info">
+                <h4 class="project-card-title">Disaster Tweet Classification</h4>
+                <div class="project-card-tags">
+                  <span class="project-card-tag">NLP</span>
+                  <span class="project-card-tag">BERT</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 7: Airbnb -->
+            <div class="project-card"
+                 data-categories="data-science,ml-ai"
+                 data-title="AI for Airbnb Superhosts"
+                 data-description="Built a predictive AI model identifying key success drivers for Airbnb hosts, proposing targeted growth strategies. Analyzed listing data to uncover patterns that lead to Superhost status."
+                 data-achievements='["Built gradient boosting model with 89% accuracy","Applied SMOTE for handling class imbalance","Performed geospatial analysis of 50K+ listings","Identified top 10 factors driving Superhost success"]'
+                 data-project-url="project-7.html">
+              <img src="assets/images/airbnb-thumb.png" alt="AI for Airbnb Superhosts" class="project-card-image">
+              <div class="project-card-info">
+                <h4 class="project-card-title">AI for Airbnb Superhosts</h4>
+                <div class="project-card-tags">
+                  <span class="project-card-tag">Gradient Boosting</span>
+                  <span class="project-card-tag">SMOTE</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 8: Bankruptcy -->
+            <div class="project-card"
+                 data-categories="data-science,ml-ai"
+                 data-title="Bankruptcy Prediction"
+                 data-description="Utilized SAS Enterprise Miner to create an ensemble model predicting corporate bankruptcy with high accuracy. Analyzed financial ratios and market indicators for early warning detection."
+                 data-achievements='["Built ensemble model with 91% accuracy using SAS EM","Analyzed 20+ financial ratios as predictors","Implemented feature engineering for ratio-based indicators","Created risk scoring system for portfolio management"]'
+                 data-project-url="project-8.html">
+              <img src="assets/images/bankruptcy-thumb.png" alt="Bankruptcy Prediction" class="project-card-image">
+              <div class="project-card-info">
+                <h4 class="project-card-title">Bankruptcy Prediction</h4>
+                <div class="project-card-tags">
+                  <span class="project-card-tag">SAS EM</span>
+                  <span class="project-card-tag">Ensemble</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills Window -->
+  <div id="window-skills" class="window window-grid" data-cascade="3">
+    <div class="window-header">
+      <div class="traffic-lights">
+        <button class="traffic-light traffic-close" aria-label="Close"></button>
+        <button class="traffic-light traffic-minimize" aria-label="Minimize"></button>
+        <button class="traffic-light traffic-maximize" aria-label="Maximize"></button>
+      </div>
+      <div class="window-title">
+        <span>Skills</span>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="skills-content">
+
+        <div class="skills-category">
+          <h3 class="skills-category-title">AI/ML & LLM Technologies</h3>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fas fa-robot" style="color: #10a37f;"></i></div>
+              <span class="skill-name">LLM Agents</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fas fa-search" style="color: #ff6b6b;"></i></div>
+              <span class="skill-name">RAG</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fas fa-comment-dots" style="color: #a855f7;"></i></div>
+              <span class="skill-name">Prompt Eng.</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fas fa-microphone" style="color: #3b82f6;"></i></div>
+              <span class="skill-name">Voice AI</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-pytorch-original colored"></i></div>
+              <span class="skill-name">PyTorch</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-tensorflow-original colored"></i></div>
+              <span class="skill-name">TensorFlow</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fas fa-brain" style="color: #fbbf24;"></i></div>
+              <span class="skill-name">HuggingFace</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fas fa-cog" style="color: #10a37f;"></i></div>
+              <span class="skill-name">OpenAI API</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skills-category">
+          <h3 class="skills-category-title">Languages & Frameworks</h3>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-python-plain colored"></i></div>
+              <span class="skill-name">Python</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-mysql-plain colored"></i></div>
+              <span class="skill-name">SQL</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-fastapi-plain colored"></i></div>
+              <span class="skill-name">FastAPI</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-flask-original colored"></i></div>
+              <span class="skill-name">Flask</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-pandas-plain-wordmark colored"></i></div>
+              <span class="skill-name">Pandas</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-scikitlearn-plain colored"></i></div>
+              <span class="skill-name">Scikit-learn</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fas fa-chart-line" style="color: #22c55e;"></i></div>
+              <span class="skill-name">XGBoost</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-numpy-plain colored"></i></div>
+              <span class="skill-name">NumPy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skills-category">
+          <h3 class="skills-category-title">Cloud & Deployment</h3>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-amazonwebservices-plain-wordmark colored"></i></div>
+              <span class="skill-name">AWS</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-googlecloud-plain"></i></div>
+              <span class="skill-name">GCP</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-docker-plain colored"></i></div>
+              <span class="skill-name">Docker</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-heroku-original colored"></i></div>
+              <span class="skill-name">Heroku</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="devicon-git-plain colored"></i></div>
+              <span class="skill-name">Git</span>
+            </div>
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fas fa-server" style="color: #64748b;"></i></div>
+              <span class="skill-name">REST APIs</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Certifications Window -->
+  <div id="window-certifications" class="window window-grid" data-cascade="4">
+    <div class="window-header">
+      <div class="traffic-lights">
+        <button class="traffic-light traffic-close" aria-label="Close"></button>
+        <button class="traffic-light traffic-minimize" aria-label="Minimize"></button>
+        <button class="traffic-light traffic-maximize" aria-label="Maximize"></button>
+      </div>
+      <div class="window-title">
+        <span>Certifications</span>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="certifications-content">
+        <div class="certifications-grid">
+          <a href="https://www.coursera.org/account/accomplishments/specialization/8CEAUHGQ79KC" target="_blank" rel="noopener" class="cert-item">
+            <img src="assets/images/certs/Unknown.png" alt="DeepLearning.AI ML Specialization">
+          </a>
+          <a href="https://drive.google.com/file/d/1JLmV_vFex0l234vzeEKTLkf00ZnF6MzO/view?usp=sharing" target="_blank" rel="noopener" class="cert-item">
+            <img src="assets/images/certs/Unknown-1.png" alt="DataCamp Data Analyst">
+          </a>
+          <a href="https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=455&cvid=wLjygtLOrlK68+dHP9iLgQ==" target="_blank" rel="noopener" class="cert-item">
+            <img src="assets/images/certs/Unknown-3.png" alt="Azure AI Fundamentals">
+          </a>
+          <a href="https://drive.google.com/file/d/1VkVU3owI5G3y1eonbh_CFRYe-JwN9e85/view?usp=sharing" target="_blank" rel="noopener" class="cert-item">
+            <img src="assets/images/certs/Unknown-2.png" alt="Akuna Capital Options 201">
+          </a>
+          <a href="https://www.coursera.org/account/accomplishments/verify/8XJQWBD3FNGC" target="_blank" rel="noopener" class="cert-item">
+            <img src="assets/images/certs/ab_side_by_side_gcp_datanalyticsspecialization_badge.png" alt="Google Data Analytics">
+          </a>
+          <a href="https://drive.google.com/file/d/1SCDy2zDJai322tfW322qjbC08uycIrpm/view?usp=sharing" target="_blank" rel="noopener" class="cert-item">
+            <img src="assets/images/certs/images.jpeg" alt="Bloomberg Market Concepts">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Window -->
+  <div id="window-contact" class="window window-standard">
+    <div class="window-header">
+      <div class="traffic-lights">
+        <button class="traffic-light traffic-close" aria-label="Close"></button>
+        <button class="traffic-light traffic-minimize" aria-label="Minimize"></button>
+        <button class="traffic-light traffic-maximize" aria-label="Maximize"></button>
+      </div>
+      <div class="window-title">
+        <span>Contact</span>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="contact-content">
+        <img src="assets/images/headshot.JPG" alt="Sanjith Krishna" class="contact-avatar">
+        <h2 class="contact-name">Sanjith Krishna</h2>
+        <p class="contact-tagline">Let's build something amazing together</p>
+
+        <div class="contact-links">
+          <a href="mailto:sanjithkrishnaus@gmail.com" class="contact-link">
+            <div class="contact-link-icon email">
+              <i class="fas fa-envelope" style="color: #fff;"></i>
+            </div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">Email</div>
+              <div class="contact-link-value">sanjithkrishnaus@gmail.com</div>
+            </div>
+          </a>
+          <a href="tel:+17657672708" class="contact-link">
+            <div class="contact-link-icon phone">
+              <i class="fas fa-phone-alt" style="color: #fff;"></i>
+            </div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">Phone</div>
+              <div class="contact-link-value">765-767-2708</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/sanjith-krishna/" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link-icon linkedin">
+              <i class="fab fa-linkedin-in" style="color: #fff;"></i>
+            </div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">LinkedIn</div>
+              <div class="contact-link-value">sanjith-krishna</div>
+            </div>
+          </a>
+          <a href="https://github.com/sanjith-v" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link-icon github">
+              <i class="fab fa-github" style="color: #fff;"></i>
+            </div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">GitHub</div>
+              <div class="contact-link-value">sanjith-v</div>
+            </div>
+          </a>
+          <a href="sanjith-resume.pdf" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link-icon resume">
+              <i class="fas fa-file-alt" style="color: #fff;"></i>
+            </div>
+            <div class="contact-link-text">
+              <div class="contact-link-label">Resume</div>
+              <div class="contact-link-value">Download PDF</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       DOCK
+       ============================================================ -->
+  <nav id="dock" aria-label="Application dock">
+
+    <!-- App Icons -->
+    <div class="dock-item" data-window="window-projects" data-tooltip="Finder">
+      <div class="dock-icon dock-finder"></div>
+    </div>
+
+    <div class="dock-item" data-window="window-about" data-tooltip="Notes">
+      <div class="dock-icon dock-notes"></div>
+    </div>
+
+    <div class="dock-item" data-window="window-experience" data-tooltip="Calendar">
+      <div class="dock-icon dock-calendar">
+        <div class="dock-calendar-header"></div>
+        <div class="dock-calendar-day"></div>
+      </div>
+    </div>
+
+    <div class="dock-item" data-window="window-skills" data-tooltip="Terminal">
+      <div class="dock-icon dock-terminal">>_</div>
+    </div>
+
+    <div class="dock-item" data-window="window-certifications" data-tooltip="Keychain">
+      <div class="dock-icon dock-keychain"></div>
+    </div>
+
+    <div class="dock-item" data-window="window-contact" data-tooltip="Mail">
+      <div class="dock-icon dock-mail"></div>
+    </div>
+
+    <!-- Separator -->
+    <div class="dock-separator"></div>
+
+    <!-- External Links -->
+    <div class="dock-item" data-url="sanjith-resume.pdf" data-tooltip="Resume">
+      <div class="dock-icon dock-safari"></div>
+    </div>
+
+    <div class="dock-item" data-url="https://github.com/sanjith-v" data-tooltip="GitHub">
+      <div class="dock-icon dock-github">
+        <i class="fab fa-github"></i>
+      </div>
+    </div>
+
+    <div class="dock-item" data-url="https://www.linkedin.com/in/sanjith-krishna/" data-tooltip="LinkedIn">
+      <div class="dock-icon dock-linkedin">in</div>
+    </div>
+
   </nav>
-</header>
 
+  <!-- Project Modal -->
+  <div id="project-modal" class="project-modal">
+    <div class="project-modal-content">
+      <div class="project-modal-header">
+        <button class="project-modal-close" aria-label="Close"></button>
+        <span class="project-modal-title">Project</span>
+      </div>
+      <div class="project-modal-body">
+        <img src="" alt="" class="project-modal-image">
+        <p class="project-modal-description"></p>
+        <div class="project-modal-section">
+          <h4>Key Achievements</h4>
+          <ul class="project-modal-achievements"></ul>
+        </div>
+        <div class="project-modal-links"></div>
+      </div>
+    </div>
+  </div>
 
-<!-- Banner / Hero with animated BG & overlay -->
-<div id="banner-wrapper">
-  <div id="bg"></div>
-  <div id="overlay"></div>
+</div>
 
-  <section id="banner" class="major">
+<!-- ============================================================
+     MOBILE FALLBACK (Shown on screens < 768px)
+     ============================================================ -->
+<div id="mobile-fallback">
+
+  <!-- Mobile Nav -->
+  <header id="navbar">
+    <nav class="container">
+      <ul class="nav-links">
+        <li><a href="#mobile-hero">HOME</a></li>
+        <li><a href="#mobile-about">ABOUT</a></li>
+        <li class="mobile-more">
+          <button class="nav-toggle" aria-expanded="false">MORE ▾</button>
+        </li>
+        <li class="extra"><a href="#mobile-experience">EXPERIENCE</a></li>
+        <li class="extra"><a href="#mobile-projects">PROJECTS</a></li>
+        <li class="extra"><a href="#mobile-skills">SKILLS</a></li>
+        <li class="extra"><a href="#mobile-contact">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Mobile Hero -->
+  <section id="mobile-hero" class="major">
     <div class="inner">
-      <div id="banner-content">
-        <!-- 1a. Title -->
-        <h1 class="animate-title">Sanjith Krishna</h1>
+      <h1>Sanjith Krishna</h1>
+      <p>AI Engineering • Machine Learning • Voice AI</p>
+      <nav class="icons">
+        <ul>
+          <li><a href="mailto:sanjithkrishnaus@gmail.com" class="icon solid fa-envelope" title="Email"></a></li>
+          <li><a href="https://www.linkedin.com/in/sanjith-krishna/" class="icon brands fa-linkedin" title="LinkedIn" target="_blank" rel="noopener"></a></li>
+          <li><a href="https://github.com/sanjith-v" class="icon brands fa-github" title="GitHub" target="_blank" rel="noopener"></a></li>
+          <li><a href="sanjith-resume.pdf" class="icon solid fa-file-alt" title="Resume" target="_blank" rel="noopener"></a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
 
-        <!-- 1b. Subtitle -->
-        <p class="animate-subtitle">
-          Data Science • Machine Learning • Analytics
-        </p>
-
-        <!-- 1c. Social / Resume icons -->
-        <nav class="icons animate-icons">
-          <ul>
-            <li>
-              <a href="mailto:sanjithkrishnaus@gmail.com"
-                 class="icon solid fa-envelope"
-                 title="Email"
-                 target="_blank" rel="noopener noreferrer"></a>
+  <!-- Mobile About -->
+  <section id="mobile-about" class="about-section">
+    <div class="about-container">
+      <h2 class="about-title">ABOUT ME</h2>
+      <hr class="about-divider">
+      <div class="about-grid">
+        <div class="about-text">
+          <h3 class="about-subtitle">EDUCATION</h3>
+          <ul class="education-list">
+            <li class="education-item">
+              <span class="education-bar"></span>
+              <div class="education-details">
+                <h4 class="education-degree">MS in Business Analytics and Information Management</h4>
+                <p class="education-institution">Aug 2025, Purdue University</p>
+              </div>
             </li>
-            <li>
-              <a href="https://www.linkedin.com/in/sanjith-krishna/"
-                 class="icon brands fa-linkedin"
-                 title="LinkedIn"
-                 target="_blank" rel="noopener noreferrer"></a>
-            </li>
-            <li>
-              <a href="https://github.com/sanjith-v"
-                 class="icon brands fa-github"
-                 title="GitHub"
-                 target="_blank" rel="noopener noreferrer"></a>
-            </li>
-            <li>
-              <a href="/portfolio/resume4.pdf"
-                 class="icon solid fa-file-alt"
-                 title="Resume"
-                 target="_blank" rel="noopener noreferrer"></a>
+            <li class="education-item">
+              <span class="education-bar"></span>
+              <div class="education-details">
+                <h4 class="education-degree">BE in Chemical Engineering</h4>
+                <p class="education-institution">May 2024, BITS Pilani</p>
+              </div>
             </li>
           </ul>
-        </nav>
+          <p class="about-description">
+            I'm an AI Agent Deployment Engineer at Hippocratic AI, where I deploy healthcare AI solutions processing 100K+ calls across 10 partners. With a Master's in Business Analytics from Purdue and experience building RAG systems, voice agents, and ML models, I specialize in turning cutting-edge AI into production systems that deliver real impact.
+          </p>
+        </div>
+        <div class="about-image">
+          <img src="assets/images/headshot.JPG" alt="Profile picture">
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- Mobile Experience -->
+  <section id="mobile-experience" class="experience-section">
+    <div class="experience-container">
+      <h2 class="about-title">EXPERIENCE</h2>
+      <hr class="about-divider">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="flip-card">
+            <div class="card-face card-front">
+              <div class="timeline-date">Sep 2025 – Present</div>
+              <h3 class="timeline-title">AI Agent Deployment Engineer</h3>
+              <div class="timeline-company">Hippocratic AI</div>
+              <div class="timeline-location">Palo Alto, USA</div>
+            </div>
+            <div class="card-face card-back">
+              <ul>
+                <li>Deployed <strong>15 use cases</strong> across 10 healthcare partners, processing <strong>100K+ calls</strong>.</li>
+                <li>Improved response capture by <strong>30%</strong> on complex calls.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="flip-card">
+            <div class="card-face card-front">
+              <div class="timeline-date">Jun 2025 – Aug 2025</div>
+              <h3 class="timeline-title">AI Engineering Intern</h3>
+              <div class="timeline-company">THERECORDXCHANGE</div>
+              <div class="timeline-location">Indianapolis, USA</div>
+            </div>
+            <div class="card-face card-back">
+              <ul>
+                <li>Built RAG transcript reviewer with AWS Bedrock & Claude, reducing review time from <strong>2 hours to 5 seconds</strong>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="flip-card">
+            <div class="card-face card-front">
+              <div class="timeline-date">Jan 2025 – May 2025</div>
+              <h3 class="timeline-title">Data Science Consultant</h3>
+              <div class="timeline-company">Kearney Student Lab</div>
+              <div class="timeline-location">West Lafayette, IN</div>
+            </div>
+            <div class="card-face card-back">
+              <ul>
+                <li>Built ensemble model with <strong>97.3% precision</strong>.</li>
+                <li>Forecasted spend (Holt-Winters, MAPE 8.46%).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="flip-card">
+            <div class="card-face card-front">
+              <div class="timeline-date">Sep 2023 – Aug 2024</div>
+              <h3 class="timeline-title">Data Scientist</h3>
+              <div class="timeline-company">Finsire</div>
+              <div class="timeline-location">Chennai, India</div>
+            </div>
+            <div class="card-face card-back">
+              <ul>
+                <li>Deployed vehicle-valuation model for all India vehicles (2013-2023).</li>
+                <li>Optimized APIs: <strong>2 min → 2 sec</strong>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Projects -->
+  <section id="mobile-projects" class="special">
+    <div class="experience-container">
+      <h2 class="about-title">PROJECTS</h2>
+      <hr class="about-divider">
+    </div>
+    <div class="tiles">
+      <article>
+        <span class="image"><img src="assets/images/instacart-thumb.png" alt="Instacart Basket Analysis"></span>
+        <div class="content">
+          <h3>Instacart Basket Analysis</h3>
+          <p class="desc">SQL analysis of 3M+ grocery orders for shopping patterns.</p>
+          <div class="tags"><span>SQL</span><span>PostgreSQL</span></div>
+        </div>
+        <a href="project-1.html" class="link primary"></a>
+      </article>
+      <article>
+        <span class="image"><img src="assets/images/caption-thumb.png" alt="GenAI Caption Generator"></span>
+        <div class="content">
+          <h3>GenAI Caption Generator</h3>
+          <p class="desc">End-to-end GenAI pipeline with BLIP and GPT-4.</p>
+          <div class="tags"><span>GenAI</span><span>HuggingFace</span></div>
+        </div>
+        <a href="project-2.html" class="link primary"></a>
+      </article>
+      <article>
+        <span class="image"><img src="assets/images/spotify-thumb.png" alt="Spotify Song Recommender"></span>
+        <div class="content">
+          <h3>Spotify Song Recommender</h3>
+          <p class="desc">Clustering and PCA for song recommendations.</p>
+          <div class="tags"><span>PCA</span><span>Clustering</span></div>
+        </div>
+        <a href="project-3.html" class="link primary"></a>
+      </article>
+      <article>
+        <span class="image"><img src="assets/images/procurement-thumb.png" alt="Procurement Optimization"></span>
+        <div class="content">
+          <h3>Procurement Optimization</h3>
+          <p class="desc">Predictive models for procurement savings.</p>
+          <div class="tags"><span>Time Series</span><span>XGBoost</span></div>
+        </div>
+        <a href="project-4.html" class="link primary"></a>
+      </article>
+    </div>
+  </section>
+
+  <!-- Mobile Skills -->
+  <section id="mobile-skills" class="special">
+    <div class="inner">
+      <header class="major"><h2>Skills</h2></header>
+    </div>
+    <ul class="skills-grid">
+      <li class="skill-card">
+        <h3>AI/ML & LLMs</h3>
+        <div class="icon-set">
+          <span class="icon" title="PyTorch"><i class="devicon-pytorch-original colored"></i></span>
+          <span class="icon" title="TensorFlow"><i class="devicon-tensorflow-original colored"></i></span>
+          <span class="icon" title="LLM Agents"><i class="fas fa-robot" style="color: #10a37f;"></i></span>
+          <span class="icon" title="RAG"><i class="fas fa-search" style="color: #ff6b6b;"></i></span>
+        </div>
+      </li>
+      <li class="skill-card">
+        <h3>Languages</h3>
+        <div class="icon-set">
+          <span class="icon" title="Python"><i class="devicon-python-plain colored"></i></span>
+          <span class="icon" title="SQL"><i class="devicon-mysql-plain colored"></i></span>
+          <span class="icon" title="FastAPI"><i class="devicon-fastapi-plain colored"></i></span>
+        </div>
+      </li>
+      <li class="skill-card">
+        <h3>Cloud & Deploy</h3>
+        <div class="icon-set">
+          <span class="icon" title="AWS"><i class="devicon-amazonwebservices-plain-wordmark colored"></i></span>
+          <span class="icon" title="Docker"><i class="devicon-docker-plain colored"></i></span>
+          <span class="icon" title="Git"><i class="devicon-git-plain colored"></i></span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Mobile Contact -->
+  <footer id="mobile-contact" class="footer-revamp">
+    <div class="footer-inner">
+      <div class="contact-header">
+        <h2 class="about-title">CONTACT</h2>
+        <hr class="about-divider">
+      </div>
+      <div class="contact-details">
+        <p class="email"><a href="mailto:sanjithkrishnaus@gmail.com">sanjithkrishnaus@gmail.com</a></p>
+        <p class="phone"><a href="tel:+17657672708">765-767-2708</a></p>
+      </div>
+      <div class="social">
+        <a href="https://www.linkedin.com/in/sanjith-krishna/" class="icon brands alt fa-linkedin" aria-label="LinkedIn"></a>
+        <a href="https://github.com/sanjith-v" class="icon brands alt fa-github" aria-label="GitHub"></a>
+      </div>
+      <ul class="copyright">
+        <li>&copy; Sanjith Krishna</li>
+        <li>Design base: <a href="https://html5up.net">HTML5 UP</a></li>
+      </ul>
+    </div>
+  </footer>
+
 </div>
 
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/desktop/BootSequence.js"></script>
+<script src="assets/js/desktop/WindowManager.js"></script>
+<script src="assets/js/desktop/ContentLoader.js"></script>
+<script src="assets/js/desktop/app.js"></script>
 
+<!-- Mobile navigation toggle -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.nav-links');
 
-
-    <!-- Main content -->
-    <div id="main">
-
-     <!-- About -->
-     <section id="about" class="about-section">
-      <div class="about-container">
-        <!-- Section title -->
-        <h2 class="about-title">ABOUT ME</h2>
-        <hr   class="about-divider" />
-    
-        <!-- Two-column grid: left = text, right = image -->
-        <div class="about-grid">
-          
-          <!-- Left column: text content -->
-          <div class="about-text">
-            
-            <!-- Sub-section heading -->
-            <h3 class="about-subtitle">EDUCATION</h3>
-    
-            <!-- List of education entries -->
-            <ul class="education-list">
-              <li class="education-item">
-                <span class="education-bar"></span>
-                <div class="education-details">
-                  <h4 class="education-degree">MS in Business Analytics and Information Management </h4>
-                  <p class="education-institution">
-                    2025, Purdue University 
-                  </p>
-                </div>
-              </li>
-              <li class="education-item">
-                <span class="education-bar"></span>
-                <div class="education-details">
-                  <h4 class="education-degree">BE in Chemical Engineering </h4>
-                  <p class="education-institution">
-                    2024, Birla Institute of Technology and Science, Pilani
-                  </p>
-                </div>
-              </li>
-            </ul>
-    
-            <!-- Descriptive paragraph -->
-            <p class="about-description">
-              I'm a data scientist currently pursuing my Master's in Business Analytics at Purdue University, specializing in machine learning, NLP, and optimization. I’ve built a LangChain-based RAG system for legal compliance, led the data science team at a fintech startup to create a vehicle valuation model, and helped develop an AI platform for blood supply optimization that was acquired. My experience across fintech, legaltech, and consulting has equipped me to build predictive models and scalable analytics solutions that address real-world business challenges. I enjoy working in dynamic teams, turning complex data into actionable insights, and using advanced analytics to drive meaningful decisions.
-            </div>
-    
-          <!-- Right column: profile image -->
-          <div class="about-image">
-            <img src="assets/images/headshot.JPG" alt="Profile picture" />
-          </div>
-    
-        </div>
-      </div>
-    </section>
-
-    <!-- ▸▸ EXPERIENCE – flip-card timeline ▸▸ -->
-<section id="experience" class="experience-section">
-  <div class="experience-container">
-    <h2 class="about-title">EXPERIENCE</h2>
-    <hr class="about-divider" />
-
-    <div class="timeline">
-
-      <!-- ─────────────────── Prediction Guard ─────────────────── -->
-      <div class="timeline-item">
-        <div class="flip-card">
-          <div class="card-face card-front">
-            <div class="timeline-date">Jun 2025 – Present</div>
-            <h3 class="timeline-title">AI Engineering Intern</h3>
-            <div class="timeline-company">THERECORDXCHANGE</div>
-            <div class="timeline-location">Remote, USA</div>
-          </div>
-
-          <div class="card-face card-back">
-            <ul>
-              <li>Building a RAG-based AI compliance system for judicial hearings using AWS Bedrock, Claude, TensorFlow and a FAISS vector database to compare automatic speech recognition (ASR) transcripts with legal benchmarks using Cursor.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- ─────────────────── Kearney ─────────────────── -->
-      <div class="timeline-item">
-        <div class="flip-card">                      <!-- NEW wrapper -->
-
-          <!-- ▸ Front ▸ -->
-          <div class="card-face card-front">
-            <div class="timeline-date">Jan 2025 – Apr 2025</div>
-            <h3 class="timeline-title">Data Science Consultant</h3>
-            <div class="timeline-company">Kearney Student Labs</div>
-            <div class="timeline-location">Remote, USA</div>
-          </div>
-
-          <!-- ▸ Back ▸ -->
-          <div class="card-face card-back">
-            <ul>
-              <li>Built a procurement-analytics framework flagging negotiation-worthy spend with <strong>97.3 % accuracy</strong>.</li>
-              <li>Forecasted procurement spend (Holt-Winters, MAPE 8.46 %).</li>
-              <li>Identified key employee-benefit cost drivers via regression.</li>
-            </ul>
-          </div>
-
-        </div><!-- /.flip-card -->
-      </div><!-- /.timeline-item -->
-
-      <!-- ─────────────────── Finsire ─────────────────── -->
-      <div class="timeline-item">
-        <div class="flip-card">
-          <div class="card-face card-front">
-            <div class="timeline-date">Sep 2023 – Aug 2024</div>
-            <h3 class="timeline-title">Data Scientist</h3>
-            <div class="timeline-company">Finsire</div>
-            <div class="timeline-location">Chennai, India</div>
-          </div>
-
-          <div class="card-face card-back">
-            <ul>
-              <li>Deployed a vehicle-valuation model &amp; DB (<strong>23 K vehicles</strong>) for collateral-based lending.</li>
-              <li>Optimised Flask REST APIs → refresh time <strong>2 min → 2 s</strong>.</li>
-              <li>Built Word2Vec / BERT bank-statement analyser (65 % accuracy).</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- ─────────────────── Nature Healers ─────────────────── -->
-      <div class="timeline-item">
-        <div class="flip-card">
-          <div class="card-face card-front">
-            <div class="timeline-date">May 2022 – Jun 2022</div>
-            <h3 class="timeline-title">App Development Intern</h3>
-            <div class="timeline-company">Nature Healers Climate Solutions</div>
-            <div class="timeline-location">Remote, India</div>
-          </div>
-
-          <div class="card-face card-back">
-            <ul>
-              <li>Created a mobile app that <strong>gamifies climate action</strong> to boost user engagement in sustainability.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- ─────────────────── Blod.in ─────────────────── -->
-      <div class="timeline-item">
-        <div class="flip-card">
-          <div class="card-face card-front">
-            <div class="timeline-date">Sep 2021 – Nov 2021</div>
-            <h3 class="timeline-title">Web Development Intern</h3>
-            <div class="timeline-company">Blod.in</div>
-            <div class="timeline-location">Chennai, India</div>
-          </div>
-
-          <div class="card-face card-back">
-            <ul>
-              <li>Built a ReactJS + Firebase dashboard for hospitals to filter blood donors by type, distance &amp; eligibility.</li>
-              <li>Improved response speed for urgent transfusions.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- ─────────────────── MacAppStudio ─────────────────── -->
-      <div class="timeline-item">
-        <div class="flip-card">
-          <div class="card-face card-front">
-            <div class="timeline-date">May 2021 – Aug 2021</div>
-            <h3 class="timeline-title">Full-Stack Development Intern</h3>
-            <div class="timeline-company">MacAppStudio</div>
-            <div class="timeline-location">Chennai, India</div>
-          </div>
-
-          <div class="card-face card-back">
-            <ul>
-              <li>Re-created native apps &amp; a website with React Native, Firebase &amp; Firestore for a Middle-East client.</li>
-              <li>Drove the firm’s shift to a <em>single cross-platform</em> stack.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /.timeline -->
-  </div><!-- /.experience-container -->
-</section>
-<!-- ▸▸ END EXPERIENCE ▸▸ -->
-
-
-    
-    
-    
-      <!-- Projects -->
-      <section id="projects" class="special">
-        <div class="experience-container">
-          <h2 class="about-title">PROJECTS</h2>
-          <hr class="about-divider" />
-        </div>
-        <div class="tiles">
-          <article>
-            <span class="image">
-              <img src="assets/images/instacart-thumb.png"
-                   alt="Instacart Basket Analysis">
-            </span>
-          
-            <!-- new wrapper -->
-            <div class="content">
-              <h3>Instacart Basket Analysis</h3>
-          
-              <!-- placeholder text you can replace later -->
-              <p class="desc">
-                Leveraged SQL to uncover shopping patterns, reorder dynamics, and cross-sell opportunities from 3M+ grocery orders.
-              </p>
-          
-              <!-- tech-stack tags -->
-              <div class="tags">
-                <span>SQL</span>
-                <span>PostgreSQL</span>
-              </div>
-            </div>
-          
-            <!-- keeps the whole card clickable -->
-            <a href="project-1.html" class="link primary"></a>
-          </article>
-          
-
-          <article>
-            <span class="image">
-              <img src="assets/images/caption-thumb.png" alt="GenAI Caption Generator">
-            </span>
-            <div class="content">
-              <h3>GenAI Caption Generator</h3>
-              <p class="desc">
-                Built an end-to-end GenAI pipeline generating creative, context-aware captions using BLIP embeddings and GPT-4 API.</p>
-              <div class="tags">
-                <span>GenAI</span>
-                <span>HuggingFace</span>
-                <span>FastAPI</span>
-              </div>
-            </div>
-            <a href="project-2.html" class="link primary"></a>
-          </article>
-          
-          <article>
-            <span class="image">
-              <img src="assets/images/spotify-thumb.png" alt="Spotify Song Recommender">
-            </span>
-            <div class="content">
-              <h3>Spotify Song Recommender</h3>
-              <p class="desc">
-                Used clustering and PCA to identify and visualize distinct Spotify song archetypes from audio metadata. </p>
-              <div class="tags">
-                <span>Data Science</span>
-                <span>PCA</span>
-                <span>Clustering</span>
-              </div>
-            </div>
-            <a href="project-3.html" class="link primary"></a>
-          </article>
-          
-          <article>
-            <span class="image">
-              <img src="assets/images/procurement-thumb.png" alt="Procurement Savings Optimization">
-            </span>
-            <div class="content">
-              <h3>Procurement Savings Optimization</h3>
-              <p class="desc">
-                Implemented predictive models and standardized tracking frameworks to optimize procurement savings for a global insurance firm.</p>
-              <div class="tags">
-                <span>Time Series</span>
-                <span>XGBoost</span>
-                <span>Tableau</span>
-              </div>
-            </div>
-            <a href="project-4.html" class="link primary"></a>
-          </article>
-          
-          <article>
-            <span class="image">
-              <img src="assets/images/ti3c2-thumb.png" alt="Ti₃C₂ Capacitance Study">
-            </span>
-            <div class="content">
-              <h3>Ti₃C₂ Capacitance Study</h3>
-              <p class="desc">
-                Developed ML models predicting Ti₃C₂-based supercapacitor performance, providing actionable insights for materials design.</p>
-              <div class="tags">
-                <span>Research</span>
-                <span>Neural Networks</span>
-                <span>Regression</span>
-              </div>
-            </div>
-            <a href="project-5.html" class="link primary"></a>
-          </article>
-          
-          <article>
-            <span class="image">
-              <img src="assets/images/disaster-thumb.png" alt="Disaster Tweet Classification">
-            </span>
-            <div class="content">
-              <h3>Disaster Tweet Classification</h3>
-              <p class="desc">
-                Created a high-performing NLP model ensemble classifying disaster-related tweets using CNNs and BERT transformers.</p>
-              <div class="tags">
-                <span>NLP</span>
-                <span>BERT</span>
-                <span>CNN</span>
-              </div>
-            </div>
-            <a href="project-6.html" class="link primary"></a>
-          </article>
-          
-          <article>
-            <span class="image">
-              <img src="assets/images/airbnb-thumb.png" alt="AI for Airbnb Superhosts">
-            </span>
-            <div class="content">
-              <h3>AI for Airbnb Superhosts</h3>
-              <p class="desc">
-                Built a predictive AI model identifying key success drivers for Airbnb hosts, proposing targeted growth strategies. </p>
-              <div class="tags">
-                <span>Gradient Boosting</span>
-                <span>SMOTE</span>
-                <span>Geospatial Analysis</span>
-              </div>
-            </div>
-            <a href="project-7.html" class="link primary"></a>
-          </article>
-          
-          <article>
-            <span class="image">
-              <img src="assets/images/bankruptcy-thumb.png" alt="Bankruptcy Prediction">
-            </span>
-            <div class="content">
-              <h3>Bankruptcy Prediction</h3>
-              <p class="desc">
-                Utilized SAS Enterprise Miner to create an ensemble model predicting corporate bankruptcy with high accuracy.<div class="tags">
-                <span>SAS EM</span>
-                <span>Data Mining</span>
-                <span>Ensemble Methods</span>
-              </div>
-            </div>
-            <a href="project-8.html" class="link primary"></a>
-          </article>
-          
-        </div>
-      </section>
-
-<!-- ──────────  SKILLS  ────────── -->
-<link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
-
-<section id="skills" class="special">
-  <div class="inner">
-    <header class="major"><h2>Skills</h2></header>
-  </div>
-
-  <!-- Direct grid (no outer “panel” box) -->
-  <ul class="skills-grid">
-
-    <!-- Languages & Databases -->
-    <li class="skill-card">
-      <h3>Languages & Databases</h3>
-      <div class="icon-set">
-        <span class="icon" title="Python"><i class="devicon-python-plain colored"></i></span>
-        <span class="icon" title="HTML5"><i class="devicon-html5-plain colored"></i></span>
-        <span class="icon" title="CSS3"><i class="devicon-css3-plain colored"></i></span>
-        <span class="icon" title="Swift"><i class="devicon-swift-plain colored"></i></span>
-        <span class="icon" title="React"><i class="devicon-react-original colored"></i></span>
-        <span class="icon" title="MySQL"><i class="devicon-mysql-plain colored"></i></span>
-        <span class="icon" title="PostgreSQL"><i class="devicon-postgresql-plain colored"></i></span>
-        <span class="icon" title="Firebase"><i class="devicon-firebase-plain colored"></i></span>
-      </div>
-    </li>
-
-    <!-- Frameworks/Python Libraries -->
-    <li class="skill-card">
-      <h3>Frameworks/Python Libraries</h3>
-      <div class="icon-set">
-        
-
-        <span class="icon" title="NumPy"><i class="devicon-numpy-plain colored"></i></span>
-        <span class="icon" title="Pandas"><i class="devicon-pandas-plain-wordmark colored"></i></span>
-        <span class="icon" title="Flask"><i class="devicon-flask-original colored"></i></span>
-        <span class="icon" title="FastAPI"><i class="devicon-fastapi-plain colored"></i></span>
-        <span class="icon" title="Django"><i class="devicon-django-plain colored"></i></span>
-
-        
-        <span class="icon" title="Keras"><i class="devicon-keras-plain colored"></i></span>
-        <span class="icon" title="TensorFlow"><i class="devicon-tensorflow-original colored"></i></span>
-        <span class="icon" title="PyTorch"><i class="devicon-pytorch-original colored"></i></span>
-        <span class="icon" title="Scikit-learn"><i class="devicon-scikitlearn-plain colored"></i></span>
-        <span class="icon" title="OpenCV"><i class="devicon-opencv-plain colored"></i></span>
-
-        
-        <span class="icon" title="Selenium"><i class="devicon-selenium-original colored"></i></span>
-
-       
-        <span class="icon" title="Bootstrap"><i class="devicon-bootstrap-plain colored"></i></span>
-      </div>
-    </li>
-
-    <!-- Tools & Cloud -->
-    <li class="skill-card">
-      <h3>Tools & Cloud</h3>
-      <div class="icon-set">
-        <span class="icon" title="AWS"><i class="devicon-amazonwebservices-plain-wordmark colored"></i></span>
-        <span class="icon" title="Azure"><i class="devicon-azure-plain colored"></i></span>
-        <span class="icon" title="Tableau"><img src="assets/images/tableau.svg" alt="Tableau"></span>
-        <span class="icon" title="MATLAB"><i class="devicon-matlab-plain colored"></i></span>
-        <span class="icon" title="Jupyter"><i class="devicon-jupyter-plain colored"></i></span>
-        <span class="icon" title="Git"><i class="devicon-git-plain colored"></i></span>
-        <span class="icon" title="Heroku"><i class="devicon-heroku-plain colored"></i></span>
-        <span class="icon" title="Docker"><i class="devicon-docker-plain colored"></i></span>
-        <span class="icon" title="Kubernetes"><i class="devicon-kubernetes-plain colored"></i></span>
-        <span class="icon" title="Google Cloud"><i class="devicon-googlecloud-plain"></i></span>
-
-        
-          
-      </div>
-    </li>
-
-  </ul>
-</section>
-
-
-
-
-<!----- CERTIFICATIONS ----->
-<section id="certifications" class="special">
-  <div class="inner">
-    <h2 class="about-title">CERTIFICATIONS</h2>
-    <hr class="about-divider" />
-
-    <ul class="cert-grid">
-
-      <!-- 1 ▸ DeepLearning.AI ML Specialization -->
-      <li>
-        <a class="cert-card"
-           href="https://www.coursera.org/account/accomplishments/specialization/8CEAUHGQ79KC"
-           target="_blank" rel="noopener">
-          <div class="cert-image">
-            <img src="assets/images/certs/Unknown.png"
-                 alt="DeepLearning.AI ML Specialization">
-          </div>
-        </a>
-      </li>
-
-      <!-- 2 ▸ DataCamp Data Analyst -->
-      <li>
-        <a class="cert-card"
-           href="https://drive.google.com/file/d/1JLmV_vFex0l234vzeEKTLkf00ZnF6MzO/view?usp=sharing"
-           target="_blank" rel="noopener">
-          <div class="cert-image">
-            <img src="assets/images/certs/Unknown-1.png"
-                 alt="DataCamp Data Analyst">
-          </div>
-          
-        </a>
-      </li>
-
-      <!-- 3 ▸ Azure AI Fundamentals -->
-      <li>
-        <a class="cert-card"
-           href="https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=455&cvid=wLjygtLOrlK68+dHP9iLgQ=="
-           target="_blank" rel="noopener">
-          <div class="cert-image">
-            <img src="assets/images/certs/Unknown-3.png"
-                 alt="Azure AI Fundamentals">
-          </div>
-         
-        </a>
-      </li>
-
-      <!-- 4 ▸ Akuna Capital Options-201 -->
-      <li>
-        <a class="cert-card"
-           href="https://drive.google.com/file/d/1VkVU3owI5G3y1eonbh_CFRYe-JwN9e85/view?usp=sharing"
-           target="_blank" rel="noopener">
-          <div class="cert-image">
-            <img src="assets/images/certs/Unknown-2.png"
-                 alt="Akuna Capital Options 201">
-          </div>
-         
-        </a>
-      </li>
-
-      <!-- 5 ▸ Google Data Analytics -->
-      <li>
-        <a class="cert-card"
-           href="https://www.coursera.org/account/accomplishments/verify/8XJQWBD3FNGC"
-           target="_blank" rel="noopener">
-          <div class="cert-image">
-            <img src="assets/images/certs/ab_side_by_side_gcp_datanalyticsspecialization_badge.png"
-                 alt="Google Data Analytics">
-          </div>
-          
-        </a>
-      </li>
-
-      <!-- 6 ▸ Bloomberg Market Concepts -->
-      <li>
-        <a class="cert-card"
-           href="https://drive.google.com/file/d/1SCDy2zDJai322tfW322qjbC08uycIrpm/view?usp=sharing"
-           target="_blank" rel="noopener">
-          <div class="cert-image">
-            <img src="assets/images/certs/images.jpeg"
-                 alt="Bloomberg Market Concepts">
-          </div>
-          
-        </a>
-      </li>
-
-    </ul><!-- /.cert-grid -->
-  </div><!-- /.inner -->
-</section>
-
-
-
-<!-- ▸ FOOTER / CONTACT SECTION  ▸–––––––––––––––––––––––––––––––––– -->
-<footer id="footer" class="footer-revamp">
-  <div class="footer-inner">
-
-    <!-- anchor so #contact in the navbar scrolls here -->
-    <a id="contact" tabindex="-1" aria-hidden="true"></a>
-
-    <!-- SECTION TITLE – mirrors the experience heading -->
-    <div class="contact-header">
-      <h2 class="about-title">CONTACT</h2>
-      <hr class="about-divider" />
-    </div>
-
-    <!-- EMAIL  |  PHONE -->
-    <div class="contact-details">
-      <p class="email">
-        <a href="mailto:sanjithkrishnaus@gmail.com">sanjithkrishnaus@gmail.com</a>
-      </p>
-      <p class="phone">
-        <a href="tel:+17657672708">765-767-2708</a>
-      </p>
-    </div>
-
-    <!-- SOCIAL ICONS -->
-    <div class="social">
-      <a href="https://www.linkedin.com/in/sanjith-krishna/"
-         class="icon brands alt fa-linkedin"
-         aria-label="LinkedIn"></a>
-      <a href="https://github.com/sanjith-v"
-         class="icon brands alt fa-github"
-         aria-label="GitHub"></a>
-    </div>
-
-    <!-- COPYRIGHT -->
-    <ul class="copyright">
-      <li>&copy; Sanjith Krishna</li>
-      <li>Design base: <a href="https://html5up.net">HTML5 UP</a></li>
-    </ul>
-
-  </div>
-</footer>
-
-
-
-  <!-- Scripts -->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/jquery.scrolly.min.js"></script>
-  <script src="assets/js/jquery.scrollex.min.js"></script>
-  <script src="assets/js/browser.min.js"></script>
-  <script src="assets/js/breakpoints.min.js"></script>
-  <script src="assets/js/util.js"></script>
-  <script src="assets/js/main.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.querySelector('.nav-toggle');
-      const nav    = document.querySelector('.nav-links');
-    
-      /* 1️⃣  open / close when “More ▾” is pressed */
-      toggle.addEventListener('click', () => {
-        const isOpen = nav.classList.toggle('open');
-        toggle.classList.toggle('open', isOpen);
-        toggle.setAttribute('aria-expanded', isOpen);
-      });
-    
-      /* 2️⃣  close again after a menu item is chosen (mobile view) */
-      nav.addEventListener('click', e => {
-        if (e.target.tagName === 'A' && nav.classList.contains('open')) {
-          nav.classList.remove('open');
-          toggle.classList.remove('open');
-          toggle.setAttribute('aria-expanded', 'false');
-        }
-      });
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
     });
-    </script>
-    
-    
-  
+
+    nav.addEventListener('click', e => {
+      if (e.target.tagName === 'A' && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Flip cards for mobile
+  document.querySelectorAll('.flip-card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('flipped');
+    });
+  });
+});
+</script>
 
 </body>
 </html>
